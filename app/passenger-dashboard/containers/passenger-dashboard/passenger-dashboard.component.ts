@@ -1,29 +1,20 @@
 import {Component, OnInit} from "@angular/core";
-import {Child, Passenger } from '../../models/passenger-dashboard.interface'
+import {Child, Passenger } from '../../models/passenger.interface'
 
 @Component({
     selector: 'passenger-dashboard',
     styleUrls: ['passenger-dashboard.component.scss'],
     template: `
         <div>
-            <h3>Airline Passengers</h3>
-            <passenger-count></passenger-count>
-            <passenger-detail></passenger-detail>
-            <ul>
-                <li *ngFor="let passenger of passengers; let i = index">
-        <span class="status"
-              [class.checked-in]="passenger.checkedIn"
-        ></span>
-                    {{i}}:{{ passenger.fullname }}
-                    <div class="date">
-                        Check in date: {{ passenger.checkedDate | date: 'yMMMd' | uppercase}}
-                    </div>
-                    <div class="children">
-                        <!--// here we use Safe Navigation Operator to aviod children propery error caused by random vacancy-->
-                        Children: {{passenger.children?.length || 0}}
-                    </div>
-                </li>
-            </ul>
+            <passenger-count
+                    [items]="passengers"
+            ></passenger-count>
+            <passenger-detail
+                   *ngFor="let passenger of passengers" 
+                   [detail]="passenger"
+                   (remove)="handleRemove($event)"
+                   (edit)="handleEdit($event)"
+            ></passenger-detail>
         </div>
     `
 })
@@ -64,7 +55,12 @@ export class PassengerDashboardComponent implements OnInit{
         ]
     }
 
-    handleBlur($event): void {
-        console.log($event.target.value)
+    handleRemove(event) {
+
+        console.log(event)
+    }
+
+    handleEdit(event) {
+        console.log(event)
     }
 }
