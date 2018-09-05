@@ -1,10 +1,11 @@
 import {Passenger} from "./models/passenger.interface";
 import {Injectable} from "@angular/core";
-import {Http, Response} from "@angular/http";
+import {Http, Response, Headers, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs";
 import 'rxjs/add/operator/map'
 
 const PASSENGER_API: string = '/api/passengers'
+type ObPassenger = Observable<Passenger>
 
 @Injectable() // tell Angular, we can inject things into constructor,
 // namely, this class is injectable
@@ -19,13 +20,22 @@ export class PassengereDashboardService {
             .map((response: Response) => response.json())
     }
 
-    updatePassengers(passenger: Passenger): Observable<Passenger> {
+    updatePassengers(passenger: Passenger): ObPassenger {
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'JwTestheader': 'test'
+        })
+
+        let options = new RequestOptions({
+            headers
+        })
+
         return this.http
-            .put(PASSENGER_API + `/${passenger.id}`, passenger)
+            .put(PASSENGER_API + `/${passenger.id}`, passenger, options)
             .map((data: Response) => data.json())
     }
 
-    removePassengers(passenger: Passenger): Observable<Passenger> {
+    removePassengers(passenger: Passenger): ObPassenger {
         return this.http
             .delete(PASSENGER_API + `/${passenger.id}`)
             .map((data: Response) => data.json())
