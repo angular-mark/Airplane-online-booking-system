@@ -6,7 +6,8 @@ import 'rxjs/add/operator/map'
 
 const PASSENGER_API: string = '/api/passengers'
 
-@Injectable() // tell Angular, we can inject things into constructor
+@Injectable() // tell Angular, we can inject things into constructor,
+// namely, this class is injectable
 export class PassengereDashboardService {
     constructor(private http: Http) {
         console.log(this.http)
@@ -16,5 +17,17 @@ export class PassengereDashboardService {
         return this.http
             .get(PASSENGER_API)
             .map((response: Response) => response.json())
+    }
+
+    updatePassengers(passenger: Passenger): Observable<Passenger> {
+        return this.http
+            .put(PASSENGER_API + `/${passenger.id}`, passenger)
+            .map((data: Response) => data.json())
+    }
+
+    removePassengers(passenger: Passenger): Observable<Passenger> {
+        return this.http
+            .delete(PASSENGER_API + `/${passenger.id}`)
+            .map((data: Response) => data.json())
     }
 }
