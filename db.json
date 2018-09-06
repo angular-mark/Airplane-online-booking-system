@@ -5,41 +5,28 @@
       "fullname": "Stephen23",
       "checkedIn": true,
       "checkedDate": 1491606000000,
-      "children": null
+      "baggage": "none"
     },
     {
       "id": 2,
       "fullname": "Rose",
       "checkedIn": false,
       "checkedDate": null,
-      "children": [
-        {
-          "name": "Ted",
-          "age": 12
-        },
-        {
-          "name": "Chloe",
-          "age": 7
-        }
-      ]
+      "baggage": ""
     },
     {
       "id": 4,
       "fullname": "Louise",
       "checkedIn": true,
       "checkedDate": 1491606000000,
-      "children": [
-        {
-          "name": "Tobe",
-          "age": 12
-        }
-      ]
+      "baggage": ""
     },
     {
       "id": 5,
       "fullname": "Mark",
       "checkedIn": false,
-      "checkedDate": 1491606000000
+      "checkedDate": 1491606000000,
+      "baggage": ""
     }
   ]
 }
