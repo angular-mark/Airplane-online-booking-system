@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import {Passenger} from "../../models/passenger.interface";
+import { Baggage } from "../../models/baggage.interface";
 
 @Component({
     selector: 'passenger-form',
@@ -52,6 +53,18 @@ import {Passenger} from "../../models/passenger.interface";
                        [ngModel]="detail?.checkedDate"
                 >
             </div>
+            <div>
+                Luggage:
+                <select name="baggage" [ngModel]="detail?.baggage">
+                    <option 
+                    *ngFor="let item of baggage"
+                    [value]="item.key"
+                    [selected]="item.key === detail?.baggage"
+                    >
+                        {{ item.value }}
+                    </option>
+                </select>
+            </div>
             {{ form.value | json }}
         </form> 
     `
@@ -59,6 +72,17 @@ import {Passenger} from "../../models/passenger.interface";
 
 export class PassengerFormComponent {
    @Input() detail: Passenger
+    baggage: Baggage[] = [{
+       key: 'none',
+        value: 'No baggage'
+    },{
+       key: 'hand-only',
+        value: 'Hand baggage'
+    },{
+       key: 'hold-only',
+        value: 'Hold baggage'
+    }]
+
     toggleCheckIn(event: boolean): void {
        if(event && this.detail) {
            this.detail.checkedDate = Date.now()
