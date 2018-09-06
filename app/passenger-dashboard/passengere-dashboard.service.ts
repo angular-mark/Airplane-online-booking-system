@@ -13,12 +13,18 @@ type ObPassenger = Observable<Passenger>
 // namely, this class is injectable
 export class PassengereDashboardService {
     constructor(private http: Http) {
-        console.log(this.http)
     }
 
     getPassengers(): Observable<Passenger[]> {
         return this.http
             .get(PASSENGER_API)
+            .map((response: Response) => response.json())
+            .catch((error: any) => Observable.throw(error.json()))
+    }
+
+    getPassenger(id: number): ObPassenger {
+        return this.http
+            .get(`${PASSENGER_API}/${id}`)
             .map((response: Response) => response.json())
             .catch((error: any) => Observable.throw(error.json()))
     }
