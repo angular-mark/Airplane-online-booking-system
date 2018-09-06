@@ -21,10 +21,6 @@ import {Passenger} from "../../models/passenger.interface";
             <div class="date">
                 Check in date: {{ detail.checkedDate | date: 'yMMMd' | uppercase}}
             </div>
-            <div class="children">
-                <!--// here we use Safe Navigation Operator to aviod children propery error caused by random vacancy-->
-                Children: {{detail.children?.length || 0}}
-            </div>
             <button (click)="toggleEdit()"> {{ editing ? 'Done' : 'Edit' }}</button>
             <button (click)="onRemove()"> Remove </button>
         </div>
