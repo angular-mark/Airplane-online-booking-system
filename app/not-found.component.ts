@@ -4,7 +4,8 @@ import { Component } from "@angular/core";
     selector: 'app-home',
     template: `
         <div>
-            404 page :(
+            404 page :( 
+            <a routerLink="/">Go home</a>
         </div>
     `,
 })
