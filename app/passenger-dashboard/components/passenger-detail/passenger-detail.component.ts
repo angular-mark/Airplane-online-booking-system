@@ -23,6 +23,7 @@ import {Passenger} from "../../models/passenger.interface";
             </div>
             <button (click)="toggleEdit()"> {{ editing ? 'Done' : 'Edit' }}</button>
             <button (click)="onRemove()"> Remove </button>
+            <button (click)="goToPassenger()"> View </button>
         </div>
     `
 })
@@ -30,8 +31,9 @@ import {Passenger} from "../../models/passenger.interface";
 export class PassengerDetailComponent implements OnChanges {
     @Input() detail: Passenger
 
-    @Output() remove: EventEmitter<any> = new EventEmitter()
-    @Output() edit: EventEmitter<any> = new EventEmitter()
+    @Output() remove: EventEmitter<Passenger> = new EventEmitter<Passenger>()
+    @Output() edit: EventEmitter<Passenger> = new EventEmitter<Passenger>()
+    @Output() view: EventEmitter<Passenger> = new EventEmitter<Passenger>()
 
     editing: boolean = false
 
@@ -41,6 +43,10 @@ export class PassengerDetailComponent implements OnChanges {
             this.detail = {...this.detail, ...changes.detail.currentValue}
         }
         console.log(changes)
+    }
+
+    goToPassenger() {
+        this.view.emit(this.detail)
     }
 
     onNameChange(value: string) {
