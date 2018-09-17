@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {Child, Passenger } from '../../models/passenger.interface'
+import { Passenger } from '../../models/passenger.interface'
 import {PassengereDashboardService} from "../../passengere-dashboard.service";
 import {Router} from "@angular/router";
 
